@@ -4,7 +4,7 @@
 
 This is the repository for the paper **Going the distance?---A meta-analysis of the deterring effect of distance in tourism** co-authored by Elisa Panzera and Henri L. F. de Groot. 
 
-## Requirement
+## Requirements
 
 You need *R* and preferably *RStudio* to run this code (the latter is only needed for the internal file structure as it creates a project). Moreover, one needs to instal *Stan* to estimate the models by mcmcm.
 
