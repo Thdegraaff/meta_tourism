@@ -71,14 +71,21 @@ make_tourists_plot <- function(data){
         scale_x_discrete(limits=c("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"))
 }
 
-data_path <- here::here("data", "Gravity_V202211.csv")
-gravity <- read_csv(data_path) %>%
-    select(iso3_o, year, pop_o) %>%
-    filter(year == 2019) %>%
-    group_by(iso3_o) %>%
-    summarise(
-        population = mean(pop_o)
-    )
+# data_path <- here::here("data", "Gravity_V202211.csv")
+# gravity <- read_csv(data_path) %>%
+#     select(iso3_o, year, pop_o) %>%
+#     filter(year == 2019) %>%
+#     group_by(iso3_o) %>%
+#     summarise(
+#         population = mean(pop_o)
+#     )
+# 
+# save_path <- here::here("data", "data_gravity.Rda")
+# save(data, file = save_path)
+
+
+data_path <- here::here("data","data_gravity.Rda")
+load(file = data_path)
 
 data_path <- here::here("data", "dist_cepii.xls")
 dist_data <- read_excel(data_path) %>%
