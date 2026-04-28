@@ -21,7 +21,6 @@ If you want to run all output consecutively you need to run *main.R*.
 
 Main Data is to be found in *data_updated_RR2.xlsx* with some ancilliary data
 and earlier versions of the database. *read_data.R* transforms this to an R data file.
-Unfortunately, the *Gravity_V202211.csv* is too large for Github, therefore, the R file **dist_sim.R** will not run completely.
 
 ### Figures
 
