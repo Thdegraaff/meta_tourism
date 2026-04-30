@@ -22,6 +22,6 @@ Axis(side = 1, labels = FALSE, tck = 0)
 Axis(side = 2, labels = FALSE, tck = 0)
 legend("bottomleft", legend=c("Total effect (-0.82)", "Direct effect (-0.54)"),
        col=c("red", "blue"), lty = 1:2, bty = "n")
-title(ylab = "Number of tourists", xlab = "Distance", line=0.5, cex.lab=1.0 )
+title(ylab = "Size of tourist flow", xlab = "Distance", line=0.5, cex.lab=1.0 )
 
 dev.off()
