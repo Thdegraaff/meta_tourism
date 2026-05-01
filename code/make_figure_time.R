@@ -2,9 +2,10 @@ library("hrbrthemes")
 library("tidyverse")
 library("here")
 library("gridExtra")
+library("brms")
 
 
-model_path_models <- here::here("./output/", "sensitivity_models.RData")
+model_path_models <- here::here("./output/", "full_models.RData")
 model_path_data <- here::here("./data/", "data.Rda")
 
 load(file = model_path_models)
@@ -69,7 +70,6 @@ plot_pub_abstract <- ggplot(year_mid.df, aes(pub_year, estimate__)) + geom_line(
           panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
           panel.background = element_blank(), axis.line = element_line(colour = "black")) +
     theme(rect = element_rect(fill = "transparent"))
-    
 
 ggsave(
     plot = plot_pub_abstract,
@@ -78,3 +78,4 @@ ggsave(
     height = 3.5,
     bg = "transparent"
 )
+

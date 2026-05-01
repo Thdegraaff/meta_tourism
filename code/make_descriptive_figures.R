@@ -38,21 +38,22 @@ hist_effect <- ggplot(data_plot, aes(dist)) +
     geom_vline(xintercept = m_ll, linetype = 'dotted', color = "black") +
     geom_vline(xintercept = m_ul, linetype = 'dotted', color = "black") +
     stat_function(fun = dnorm, args = list(mean = m_mean, sd = m_sd)) +
-    xlab("Distance elasticity of tourims flows") 
+    xlab("Distance elasticity of tourims flows") + ylab("Density")
 
 dist_effect<- ggplot(data_plot, aes(x = index, y = dist))  + 
-    geom_pointrange(aes(y = dist, ymin = lower, ymax = upper), size = 0.1, alpha = 0.5, color = "cornflowerblue") +
+    geom_pointrange(aes(y = dist, ymin = lower, ymax = upper), size = 0.05, alpha = 0.5, linewidth = 0.3,
+                    color = "cornflowerblue") +
     theme_ipsum() +
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
           panel.background = element_blank(), axis.line = element_line(colour = "black")) +
-    xlab("") + ylab("Distance elasticity of tourism flows") +
+    xlab("Ordered observations (from low to high)") + ylab("Distance elasticity of tourism flows") +
     geom_hline(yintercept = m_mean, linetype = 'dashed', color = "black") +
     geom_hline(yintercept = m_ll, linetype = 'dotted', color = "black") +
     geom_hline(yintercept = m_ul, linetype = 'dotted', color = "black") 
 
 fig_path <- here::here("figures", "effect_size.pdf")
 
-cairo_pdf(file = fig_path, width = 5, height = 2)
+cairo_pdf(file = fig_path, width = 7.5, height = 3)
 grid.arrange(hist_effect, dist_effect, ncol = 2)
 dev.off()
 

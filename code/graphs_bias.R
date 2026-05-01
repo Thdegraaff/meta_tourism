@@ -1,6 +1,15 @@
-sysfonts::font_add_google("Roboto Condensed")
+#sysfonts::font_add_google("Roboto Condensed")
 #sysfonts::font_add("Roboto Condensed", regular = "RobotoCondensed-Regular.ttf")
-showtext_auto()
+#showtext_auto()
+
+library("tidyverse")
+library("hrbrthemes")
+library("here")
+library("sysfonts")
+library("gridExtra")
+library("grid")
+library("extrafont")
+library("ggpubr")
 
 set.seed(1974)
 
@@ -48,13 +57,13 @@ pred_noisland <- cbind(pred_noisland, noisland_out)
 model_colors <- c("tomato", "steelblue")
 
 p_border <- ggplot(data, mapping = aes(x = ln_distance, y = ln_tourists_border)) + 
-    geom_point(size = 1, alpha = 0.2, colour = "tomato") + 
+    geom_point(size = 0.8, alpha = 0.2, colour = "tomato") + 
     theme_ipsum() +
-    geom_point(data = subset(data, border == "1"), mapping = aes(fill = "pink"), shape = 21, stroke = 0.2, alpha = 1, size = 1, colour = "steelblue") +
+    geom_point(data = subset(data, border == "1"), mapping = aes(fill = "pink"), shape = 21, stroke = 0.2, alpha = 1, size = 0.8, colour = "steelblue") +
     geom_line(data = pred_noborder, aes(x = ln_distance, y = fit, color = "Not controlled for border"), size = 1) +
     geom_line(data = pred_border, aes(x = ln_distance, y = fit, color = "Controlled for border"), size = 1) +
-    scale_color_manual(name = "Effect of distance", values = model_colors) +
-    scale_fill_manual(name = "Effect of distance", values = "steelblue") +
+    scale_color_manual(name = "", values = model_colors) +
+    scale_fill_manual(name = "", values = "steelblue") +
     guides(fill = FALSE) +
     theme(legend.position = "top") + 
     labs(x="Distance (log)", y="Number of tourists (log)") + 
@@ -63,22 +72,24 @@ p_border <- ggplot(data, mapping = aes(x = ln_distance, y = ln_tourists_border))
     theme(axis.line = element_line(colour = "black", linewidth = 0.2))
 
 p_island <- ggplot(data, mapping = aes(x = ln_distance, y = ln_tourists_island)) + 
-    geom_point(size = 1, alpha = 0.2, colour = "tomato") + 
+    geom_point(size = 0.8, alpha = 0.2, colour = "tomato") + 
     theme_ipsum() +
-    geom_point(data = subset(data, island == "1"), mapping = aes(fill = "pink"), shape = 21, stroke = 0.2, alpha = 1, size = 1, colour = "steelblue") +
+    geom_point(data = subset(data, island == "1"), mapping = aes(fill = "pink"), shape = 21, stroke = 0.2, alpha = 1, size = 0.8, colour = "steelblue") +
     geom_line(data = pred_noisland, aes(x = ln_distance, y = fit, color = "Not controlled for island"), size = 1) +
     geom_line(data = pred_island, aes(x = ln_distance, y = fit, color = "Controlled for island"), size = 1) +
-    scale_color_manual(name = "Effect of distance", values = model_colors) +
-    scale_fill_manual(name = "Effect of distance", values = "steelblue") +
+    scale_color_manual(name = "", values = model_colors) +
+    scale_fill_manual(name = "", values = "steelblue") +
     guides(fill = FALSE) +
-    theme(legend.position = "top") + 
+    theme(legend.position = "top") +
     labs(x="Distance (log)", y="Number of tourists (log)") + 
-    theme(axis.text.x = element_blank(), axis.text.y = element_blank()) +
+    theme(axis.text.x = element_blank(), axis.text=element_text(size=14), axis.text.y = element_blank()) +
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
     theme(axis.line = element_line(colour = "black", linewidth = 0.2))
 
-cairo_pdf("./figures/direct_indirect_sim.pdf",  width = 10, heigh = 4)
-grid.arrange(p_border,p_island, ncol=2)
+fig_path <- here::here("figures", "direct_indirect_sim.pdf")
+
+cairo_pdf(fig_path,  width = 7.5, heigh = 3)
+ggarrange(p_border,p_island, ncol=2)
 dev.off()
 
 

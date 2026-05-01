@@ -65,10 +65,12 @@ make_tourists_plot <- function(data){
         theme(legend.position = "top") + 
         labs(x="Distance categories (in thousands of kilometers)", 
              y="Share of total number of tourists",
-             title = "Tourists per distance category",
-             subtitle = "In shares of total amount of tourists", 
+             #title = "Tourists per distance category",
+             #subtitle = "In shares of total amount of tourists", 
              caption = "Source: simulated data") +
-        scale_x_discrete(limits=c("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"))
+        scale_x_continuous(breaks = c(2, 4, 6, 8, 10, 12, 14, 16, 18, 20))
+        # scale_x_discrete(limits=c("1","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"),
+                         # labels = everysecond(data$cat)) 
 }
 
 # data_path <- here::here("data", "Gravity_V202211.csv")
@@ -81,8 +83,7 @@ make_tourists_plot <- function(data){
 #     )
 # 
 # save_path <- here::here("data", "data_gravity.Rda")
-# save(data, file = save_path)
-
+# save(gravity, file = save_path)
 
 data_path <- here::here("data","data_gravity.Rda")
 load(file = data_path)
@@ -95,13 +96,14 @@ dist_data <- read_excel(data_path) %>%
         cat = as.numeric(cut_interval(dist, 20)) 
     ) 
 
-p_hist <- dist_data %>%
-    ggplot(aes(x = dist)) + 
-    geom_histogram(fill="cornflowerblue", bins = 20) +
+p_hist <- dist_data |>
+    mutate(dist_1000 = dist / 1000) |>
+    ggplot(aes(x = dist_1000)) + 
+    geom_histogram(fill="cornflowerblue", col = "white", linewidth = 0.5, bins = 20) +
     theme_ipsum() +
-    labs(x="Distance between pairs of countries (in kilometers)", 
+    labs(x="Distance between pairs of countries (in thousands of kilometers)", 
          y="Number of country pairs",
-         title = "Real world distribution of distances",
+         #title = "Real world distribution of distances",
          subtitle = "", 
          caption = "Source: CEPII") 
 
@@ -232,7 +234,7 @@ grid.arrange(p_sim_plot, p_tourists_theo, ncol=2)
 dev.off()
 
 fig_path <- here::here("figures", "dist_sim_real.pdf")    
-cairo_pdf(fig_path, width = 8, heigh = 5)
+cairo_pdf(fig_path, width = 8, heigh = 4)
 grid.arrange(p_hist, p_tourists_real, ncol=2)
 dev.off()
 
