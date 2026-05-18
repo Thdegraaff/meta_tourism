@@ -6,6 +6,7 @@ library("here")
 library("hrbrthemes")
 library("ggforce")
 library("gridExtra")
+library("latex2exp")
 
 n_sim = 500
 
@@ -34,16 +35,16 @@ p_sim_plot <- ggplot(df,aes(x,y)) +
     geom_circle(aes(x0 = 0, y0 = 0, r = 0.7), lwd = 0.3, alpha = 0.5, lty = "dotted", inherit.aes=FALSE) +
     geom_circle(aes(x0 = 0, y0 = 0, r = 0.8), lwd = 0.3, alpha = 0.5, lty = "dotted", inherit.aes=FALSE) +
     geom_circle(aes(x0 = 0, y0 = 0, r = 0.9), lwd = 0.3, alpha = 0.5, lty = "dotted", inherit.aes=FALSE) +
-    geom_text(aes(x = 0.1, y = 0, label = "2"), vjust = 1, size = 2.5) +
-    geom_text(aes(x = 0.2, y = 0, label = "4"), vjust = 1, size = 2.5) +
-    geom_text(aes(x = 0.3, y = 0, label = "6"), vjust = 1, size = 2.5) +
-    geom_text(aes(x = 0.4, y = 0, label = "8"), vjust = 1, size = 2.5) +
-    geom_text(aes(x = 0.5, y = 0, label = "10"), vjust = 1, size = 2.5) +
-    geom_text(aes(x = 0.6, y = 0, label = "12"), vjust = 1, size = 2.5) +
-    geom_text(aes(x = 0.7, y = 0, label = "14"), vjust = 1, size = 2.5) +
-    geom_text(aes(x = 0.8, y = 0, label = "16"), vjust = 1, size = 2.5) +
-    geom_text(aes(x = 0.9, y = 0, label = "18"), vjust = 1, size = 2.5) +
-    geom_text(aes(x = 1, y = 0, label = "20"), vjust = 1, size = 2.5) +
+    geom_text(aes(x = 0.1, y = 0, label = "2"), vjust = 1, hjust = 0, size = 4) +
+    geom_text(aes(x = 0.2, y = 0, label = "4"), vjust = 1, hjust = 0, size = 4) +
+    geom_text(aes(x = 0.3, y = 0, label = "6"), vjust = 1, hjust = 0, size = 4)  +
+    geom_text(aes(x = 0.4, y = 0, label = "8"), vjust = 1, hjust = 0, size = 4)  +
+    #geom_text(aes(x = 0.5, y = 0, label = "10"), vjust = 1, hjust = 0, size = 4)  +
+    geom_text(aes(x = 0.6, y = 0, label = "12"), vjust = 1, hjust = 0, size = 4) +
+    #geom_text(aes(x = 0.7, y = 0, label = "14"), vjust = 1, hjust = 0, size = 4)  +
+    geom_text(aes(x = 0.8, y = 0, label = "16"), vjust = 1, hjust = 0, size = 4)  +
+    #geom_text(aes(x = 0.9, y = 0, label = "18"), vjust = 1, hjust = 0, size = 4) +
+    #geom_text(aes(x = 1, y = 0, label = "20"), vjust = 1, hjust = 0, size = 4) +
     #facet_wrap(~ type_f) +
     theme(panel.grid.major = element_blank(), 
           panel.grid.minor = element_blank(),
@@ -60,8 +61,8 @@ make_tourists_plot <- function(data){
     ggplot(data = data, aes(x = cat, y = tourists, fill = beta) ) + 
         theme_ipsum() + 
         geom_col(position = "dodge") + 
-        scale_color_manual(name = "Distance-decay", labels = c("-1.09", "-0.82", "-0.54"),values = model_colors) +
-        scale_fill_manual(name = "Distance-decay", labels = c("-1.09", "-0.82", "-0.54"), values = model_colors) +
+        scale_color_manual(name = "Distance-decay", labels = unname(TeX(c("$-1.09$", "$-0.82$", "$-0.54$"))),values = model_colors) +
+        scale_fill_manual(name = "Distance-decay", labels = unname(TeX(c("$-1.09$", "$-0.82$", "$-0.54$"))),values = model_colors) +
         theme(legend.position = "top") + 
         labs(x="Distance categories (in thousands of kilometers)", 
              y="Share of total number of tourists",
