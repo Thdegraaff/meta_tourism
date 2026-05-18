@@ -21,19 +21,23 @@ stand-alone, provided the needed input data or estimation results is already gen
 
 ### Code
 
-All code needed for output as produced in the paper (Tables and Figures). 
+In the folder `code` is all code needed for output as produced in the paper (Tables and Figures). 
 If you want to run all output consecutively you need to run `main.R`.
 
 ### Data
 
-Main Data is to be found in `data_updated_RR2.xlsx` with some ancilliary data
-and earlier versions of the database. `read_data.R` transforms this to an R data file.
+Main data is to be found in the `data` folder. 
+Data for the paper is documented in `data_updated_RR2.xlsx`. `read_data.R` transforms this to an R data file. 
+Given as well is some ancilliary data and earlier versions of the database. 
 
 ### Figures
 
-Figures as can be produced by the code. The `dag.tex` and `dag_2.tex` files create
+Figures as presented in the paper can be produced by the code as well. 
+Output is written to the `figures` folder.
+The `dag.tex` and `dag_2.tex` files create
 Directed Acyclical Graphs in pdf to be used in the paper and the appendix.
 
 ### Output
 
-Statistical output and tables in `.tex` format. Estimations create here large `.RData` files.
+Statistical output and tables in `.tex` format are written to the `output` folder. 
+The estimations create here large `.RData` files.
